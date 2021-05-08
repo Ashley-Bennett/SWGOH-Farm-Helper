@@ -5,21 +5,17 @@ import AddIconStyle from "../../Styles/AddIconStyle";
 import FabStyle from "../../Styles/FabStyle";
 import "./CharacterSelect.css";
 
-const CharacterSelect = () => {
-  const handleClick = () => {
-    console.log("here");
-  };
-
-  
-
+const CharacterSelect = (props) => {
   return (
-    <div
-      className="characterSelect-body"
-    >
-      <Fab color="primary" aria-label="add" onClick={() => {
-        handleClick();
-      }} style={FabStyle}>
-        <AddIcon  style={AddIconStyle}/>
+    <div className="characterSelect-body">
+      <h1>{props.storeName}</h1>
+      <Fab
+        color="primary"
+        aria-label="add"
+        onClick={(e) => props.handleClick(e, true, props.storeValue)}
+        style={FabStyle}
+      >
+        <AddIcon style={AddIconStyle} />
       </Fab>
     </div>
   );
