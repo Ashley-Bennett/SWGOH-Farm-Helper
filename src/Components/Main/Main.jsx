@@ -34,7 +34,10 @@ class Main extends Component {
       newCharList = this.state.charList;
       Characters.characters.map((character) => {
         if (character.stores.indexOf(storeValue) > -1) {
-          newCharList.push(character);
+          return newCharList.push(character);
+        }
+        else {
+          return null
         }
       });
     }
@@ -58,7 +61,9 @@ class Main extends Component {
             storeName={"Guild Store"}
             storeValue={"guild"}
           />
-          <CharacterSelect handleClick={this.handleClick} />
+          <CharacterSelect handleClick={this.handleClick} 
+          storeName={"Fleet Arena Store"}
+          storeValue={"fleet"}/>
           <CharacterSelect handleClick={this.handleClick} />
         </Grid>
         <Drawer

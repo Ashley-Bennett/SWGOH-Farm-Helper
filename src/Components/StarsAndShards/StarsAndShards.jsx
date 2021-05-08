@@ -26,13 +26,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StarsAndShards = () => {
+const StarsAndShards = (props) => {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
   const [value, setValue] = React.useState(30);
 
   const handleChange = (event) => {
     setAge(event.target.value);
+    props.handleSelectStars(event.target.value);
   };
 
   const handleSliderChange = (event, newValue) => {
@@ -51,8 +52,11 @@ const StarsAndShards = () => {
     }
   };
   return (
-    <div style={{color:"white"}}>
-      <FormControl className={classes.formControl}>
+    <div style={{ color: "white" }}>
+      <FormControl
+        className={classes.formControl}
+        disabled={props.selectedChar ? false : true}
+      >
         <InputLabel id="demo-simple-select-label">Stars</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -70,9 +74,12 @@ const StarsAndShards = () => {
           <MenuItem value={7}>7</MenuItem>
         </Select>
       </FormControl>
-      <Divider/>
-      <FormControl className={classes.formControl}>
-      <InputLabel id="demo-simple-select-label">Shards</InputLabel>
+      <Divider />
+      <FormControl
+        className={classes.formControl}
+        disabled={props.selectedStars ? false : true}
+      >
+        <InputLabel id="demo-simple-select-label">Shards</InputLabel>
         <Slider
           value={typeof value === "number" ? value : 0}
           onChange={handleSliderChange}

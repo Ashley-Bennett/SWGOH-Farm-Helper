@@ -1,11 +1,7 @@
 import { Avatar, GridList } from "@material-ui/core";
-import React, { useState, useEffect } from "react";
-import Characters from "../../Assets/characterDB/Characters.json";
-
-import jango from "../../Assets/img/characters/JangoFett.png";
+import React from "react";
 
 const PortraitScrollBar = (props) => {
- 
   const flexContainer = {
     display: "flex",
     flexDirection: "row",
@@ -23,23 +19,35 @@ const PortraitScrollBar = (props) => {
     width: 125,
   };
 
+  const avatarStyleSelected = {
+    height: 125,
+    width: 125,
+    boxShadow: "0 0 10px yellow",
+  };
+
   return (
     <div style={flexContainer}>
-        <GridList style={gridList}>
-          {props.charList.map((character) => {
-            return <Avatar style={avatarStyle} src={character.img} />;
-          })}
-          <Avatar style={avatarStyle} src={jango} />
-          <Avatar style={avatarStyle} src={jango} />
-          <Avatar style={avatarStyle} src={jango} />
-          <Avatar style={avatarStyle} src={jango} />
-          <Avatar style={avatarStyle} src={jango} />
-          <Avatar style={avatarStyle} src={jango} />
-          <Avatar style={avatarStyle} src={jango} />
-          <Avatar style={avatarStyle} src={jango} />
-          <Avatar style={avatarStyle} src={jango} />
-          <Avatar style={avatarStyle} src={jango} />
-        </GridList>
+      <GridList style={gridList}>
+        {props.charList.map((character) => {
+          if (character.name === props.selectedChar) {
+            return (
+              <Avatar
+                onClick={() => props.handleSelectChar(character.name)}
+                style={avatarStyleSelected}
+                src={character.img}
+              />
+            );
+          } else {
+            return (
+              <Avatar
+                onClick={() => props.handleSelectChar(character.name)}
+                style={avatarStyle}
+                src={character.img}
+              />
+            );
+          }
+        })}
+      </GridList>
     </div>
   );
 };
